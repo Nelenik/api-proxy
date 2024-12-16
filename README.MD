@@ -1,4 +1,3 @@
-I'll help you create a Markdown markup for this content. Here's a clean, structured version:
 
 # Proxy Server for API Key Security
 
@@ -8,7 +7,6 @@ This proxy server securely relays requests to external APIs, protecting sensitiv
 
 - Hides API keys by managing them server-side.
 - Enables secure communication between the client and external APIs.
-- Implements CORS to support cross-origin requests.
 
 ## Usage
 
@@ -66,8 +64,6 @@ const data = await response.json();
 console.log(data);
 ```
 
-Вот оформленный раздел Customization в Markdown:
-
 ## Customization
 
 You can easily add new endpoints to the server by extending the Express configuration in `server.js`. For example:
@@ -77,7 +73,3 @@ app.post('/custom-endpoint', async (req, res) => {
   // Your custom logic here
 });
 ```
-
-## License
-
-This project is open-source and available under the MIT License.
