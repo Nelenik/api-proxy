@@ -5,7 +5,7 @@ dotenv.config();
 
 const app = express();
 
-const PORT =process.env.PORT|| 3000;
+const PORT = process.env.PORT || 3000;
 
 const STUDIO_AI_21 = "https://api.ai21.com/studio/v1/chat/completions";
 // enable CORS for cross-browser support
@@ -20,16 +20,15 @@ app.use(function (req, res, next) {
 });
 app.use(express.json());
 
-// Ретрансляция запроса к API модели
+//proxy for StudioAI21
 app.post("/proxy/santa", async (req, res) => {
   try {
-    // console.log(req.body);
     const { messages } = req.body;
     const processedMessages = messages.map((message) => ({
       role: message.role,
       content: message.content,
     }));
-    // Отправка запроса к API модели StudioAi21
+    // Sent response to the StudioAi21 API
     const response = await fetch(`${STUDIO_AI_21}`, {
       method: "POST",
       headers: {
@@ -41,7 +40,7 @@ app.post("/proxy/santa", async (req, res) => {
         messages: processedMessages,
       }),
     });
-    // Проверка успешного статуса ответа
+
     if (!response.ok) {
       console.error(`Error from StudioAi21: ${response.statusText}`);
       return res
@@ -49,9 +48,8 @@ app.post("/proxy/santa", async (req, res) => {
         .json({ error: `StudioAi21 API error: ${response.statusText}` });
     }
 
-    // Извлечение тела ответа
     const { choices } = await response.json();
-    // Пересылка данных клиенту
+
     res.json(choices[0].message);
   } catch (error) {
     console.error("Access error on StudioAi21:", error.message);
