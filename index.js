@@ -5,7 +5,7 @@ dotenv.config();
 
 const app = express();
 
-const PORT = 3000;
+const PORT =process.env.PORT|| 3000;
 
 const STUDIO_AI_21 = "https://api.ai21.com/studio/v1/chat/completions";
 // enable CORS for cross-browser support
