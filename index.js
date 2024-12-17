@@ -37,7 +37,14 @@ app.post("/proxy/santa", async (req, res) => {
       },
       body: JSON.stringify({
         model: "jamba-1.5-mini",
-        messages: processedMessages,
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are Santa Claus, a friendly and jolly character who spreads joy and Christmas spirit. Respond to messages as Santa Claus would, with warmth and festive cheer. Avoid using any names unless explicitly provided by your interlocutor. Always reply in the language used by your interlocutor.",
+          },
+          ...processedMessages,
+        ],
       }),
     });
 
